@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layout}"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Информация о видео</title>
+</head>
+<body>
+<form layout:fragment="content">
+    <div>
+        <hr size="3">
+        <h3 th:text="'Информация о видео: ' + ${video.getVideoTitle()}"></h3>
+        <hr size="3">
+        <div class="row g-1">
+            <div class="mb-2 row">
+                <label for="title" class="col-sm-2 col-form-label no-border">Название:</label>
+                <div class="col-sm-10">
+                    <p th:text="${video.getVideoTitle()}" type="text" readonly class="form-control-plaintext"
+                       id="title">
+                </div>
+            </div>
+            <div class="mb-2 row">
+                <label for="url" class="col-sm-2 col-form-label">URL:</label>
+                <div class="col-sm-10">
+                    <a class="text-link text-blue" th:href="${video.getVideoUrl()}" target="_blank"
+                       th:text="${video.getVideoUrl()}" readonly id="url"></a>
+                </div>
+            </div>
+            <div class="mb-2 row">
+                <label for="length" class="col-sm-2 col-form-label">Продолжительность:</label>
+                <div class="col-sm-10">
+                    <p th:text="${video.getVideoLength()}" class="form-control-plaintext" id="length">
+                </div>
+            </div>
+            <div class="mb-2 row">
+                <label for="number_of_plays" class="col-sm-2 col-form-label">Количество воспроизведений:</label>
+                <div class="col-sm-10">
+                    <p th:text="${video.getNumberOfPlays()}" class="form-control-plaintext" id="number_of_plays">
+                </div>
+            </div>
+            <div class="mb-2 row">
+                <label for="identifier" class="col-sm-2 col-form-label">Идентификатор для встраивания:</label>
+                <div class="col-sm-10">
+                    <p th:text="${video.getYouTubeIdentifier()}" class="form-control-plaintext" id="identifier">
+                </div>
+            </div>
+            <div>
+                <iframe width="560" height="315" th:src="${video.getYouTubeIdentifier()}" title="YouTube video player"
+                        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;
+                    web-share" allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </div>
+</form>
+</body>
+</html>

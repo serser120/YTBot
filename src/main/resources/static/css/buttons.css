@@ -1,0 +1,38 @@
+.nav-link {
+    color: #ffffff !important;
+    background-color: #676ebe !important;
+    border-color: #676ebe !important;
+}
+
+.btn-primary {
+    color: white;
+    background-color: #676ebe !important;
+    border-color: #676ebe !important;
+}
+.btn-primary:hover {
+    color: white;
+    background-color: #676ebe !important;
+    border-color: #676ebe !important;
+}
+.text-link {
+    color: #5e00b5;
+    text-decoration: none;
+}
+
+.text-link:hover {
+    color: rgba(255, 0, 0, 0.57);
+}
+.center {
+    text-align: center;
+    color: #000000 !important;
+}
+.my_btn-outline{
+    color:white;
+    border-color:#5e00b5;
+    background-color:#5e00b5;
+}
+.my_btn-outline:hover{
+    color:#fff;
+    background-color:#676ebe;
+    border-color:#5e00b5
+}

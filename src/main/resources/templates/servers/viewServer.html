@@ -1,0 +1,77 @@
+<!--Добавление автобуса-->
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layout}"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Просмотр сервера</title>
+</head>
+<body>
+<form layout:fragment="content">
+    <div class="mt-3">
+        <h3 th:text="'Информация о сервере: ' + ${server.getServerName()}"></h3>
+        <form class="row g-1">
+            <div class="mb-2 row">
+                <label for="serverName" class="col-sm-2 col-form-label no-border">Название</label>
+                <div class="col-sm-10">
+                    <p th:text="${server.getServerName()}" class="form-control-plaintext" id="serverName">
+                </div>
+            </div>
+            <div class="mb-2 row">
+                <label for="DiscordID" class="col-sm-2 col-form-label">DiscordID</label>
+                <div class="col-sm-10">
+                    <p th:text="${server.getServerDiscordID()}" class="form-control-plaintext" id="DiscordID">
+                </div>
+            </div>
+        </form>
+        <hr class="hr"/>
+        <div>
+            <table class="table table-hover mt-3">
+                <thead>
+                <tr>
+                    <th scope="col">Название видео</th>
+                    <th scope="col">Дата</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="history : ${histories}">
+                    <td>
+                        <a class="text-link text-blue" th:href="'/videos/' + ${history.getVideoDTO().getId()}"
+                           th:text="${history.getVideoDTO().getVideoTitle()}"></a>
+                    </td>
+                    <td th:text="${history.getPlaybackDate()}"></td>
+                </tr>
+                </tbody>
+            </table>
+            <div>
+                <nav aria-label="Pagination" th:if="${histories.totalPages gt 0}">
+                    <ul class="pagination justify-content-center font-weight-bold">
+                        <li class="page-item" th:classappend="${histories.number eq 0} ? 'disabled'">
+                            <a class="page-link"
+                               th:href="@{/servers/{id1}?page={id2}(id1=${server.getId()}, id2=${histories.number lt 2 ? 1 : histories.number})}"
+                               aria-label="Previous" title="Previous Page" data-toggle="tooltip">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item" th:classappend="${i eq histories.number + 1} ? 'active'"
+                            th:each="i : ${#numbers.sequence( 1, histories.totalPages, 1)}">
+                            <a class="page-link" th:href="@{/servers/{id1}?page={id2}(id1=${server.getId()}, id2=${i})}" th:text="${i}"
+                               th:title="${'Page '+ i}" data-toggle="tooltip"></a>
+                        </li>
+                        <li class="page-item" th:classappend="${histories.number eq histories.totalPages - 1} ? 'disabled'">
+                            <a class="page-link"
+                               th:href="@{/servers/{id1}?page={id2}(id1=${server.getId()}, id2=${histories.number + 2})}"
+                               aria-label="Next" title="Next Page" data-toggle="tooltip">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</form>
+</body>
+</html>
